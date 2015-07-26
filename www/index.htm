@@ -1,0 +1,54 @@
+<html>
+<head>
+<style>
+  body {
+  color: blue;
+  font-size: 28px;
+  }
+</style>
+<script type="text/javascript">
+var host=document.location.hostname;
+function getDeviceName(hostname)
+{
+return Activate('http://'+hostname+'/cgi-bin/device.cgi?name');
+}
+
+function getDeviceAddress(hostname)
+{
+return Activate('http://'+hostname+'/cgi-bin/device.cgi?ipaddress');
+}
+ 
+function Activate(theUrl)
+{
+ var xmlHttp = new XMLHttpRequest();
+ xmlHttp.open( "GET", theUrl, false );
+ xmlHttp.send( null );
+ return xmlHttp.responseText;
+}
+
+function DeviceUrlOn(ip)
+{
+ return 'http://'+ip+'/cgi-bin/relay.cgi?on';
+}
+ 
+function DeviceUrlOff(ip)
+{
+ return 'http://'+ip+'/cgi-bin/relay.cgi?off';
+} 
+
+var deviceIP = getDeviceAddress(host);
+var deviceName = getDeviceName(host);
+</script>
+
+</head>
+<body>
+<script type="text/javascript">
+document.write('<p>' + deviceName + '</p>');
+document.write('<img src="'+deviceName+'.png" />');
+document.write('<p id="deviceOn" onclick="Activate(DeviceUrlOn(deviceIP))" title="Click to Turn On">On</p> ');
+document.write('<p id="deviceOff" onclick="Activate(DeviceUrlOff(deviceIP))" title="Click to Turn Off">Off</p>');	
+</script>
+</script>
+</body>
+</html>	  
+

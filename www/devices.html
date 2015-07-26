@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Devices</title>
+<style>
+  body {
+  color: blue;
+  font-size: 28px;
+  }
+</style>
+<script type="text/javascript">
+  var light = "192.168.29.135";
+  var fan= "192.168.29.207";
+
+ function Activate(theUrl)
+ {
+ var xmlHttp = new XMLHttpRequest();
+ xmlHttp.open( "GET", theUrl, false );
+ xmlHttp.send( null );
+ return xmlHttp.responseText;
+ }
+
+ function DeviceUrlOn(ip)
+ {
+ return 'http://'+ip+'/cgi-bin/relay.cgi?on';
+ }
+ 
+ function DeviceUrlOff(ip)
+ {
+ return 'http://'+ip+'/cgi-bin/relay.cgi?off';
+ } 
+
+</script>
+</head>
+<body>
+Devices
+
+<p>Light</p>
+<img src="light.png" alt="Light" />
+<script type="text/javascript">
+document.write('<p id="lightOn" onclick="Activate(DeviceUrlOn(light))" title="Click to Turn On">On</p> ');
+document.write('<p id="lightOff" onclick="Activate(DeviceUrlOff(light))" title="Click to Turn Off">Off</p>');	
+</script>
+<p>Fan</p>
+<img src="fan.png" alt="Fan" />
+<script type="text/javascript">
+document.write('<p id="FanOn" onclick="Activate(DeviceUrlOn(fan))" title="Click to Turn On">On</p> ');
+document.write('<p id="FanOff" onclick="Activate(DeviceUrlOff(fan))" title="Click to Turn Off">Off</p>');
+</script>
+</body>
+</html>	  
+
